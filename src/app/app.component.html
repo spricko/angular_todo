@@ -1,0 +1,24 @@
+<div class="ukoly">
+  <h1>Musím udělat!</h1>
+
+  <ul>
+    <li [hidden]="ukoly.length>0">
+      ... vůbec nic ...
+    </li>
+
+    <li *ngFor="let ukol of ukoly; let i=index">
+      <input id="ukol{{i}}" type="checkbox" class="checkbox" [(ngModel)]="ukol.hotovo" />
+      <label for="ukol{{i}}" [ngClass]="{'checked': ukol.hotovo}">{{ ukol.ukol }}</label>
+      <span (click)="smazatUkol(i)" class="delete-icon">&times;</span>
+    </li>
+  </ul>
+
+  <form (submit)="pridatUkol($event)" class="input-group mb-3">
+    <input [(ngModel)]="novyUkol" (keyup.enter)="novyUkol=''" class="form-control" name="newTodo">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="submit" [disabled]="novyUkol===''">Přidat úkol</button>
+    </div>
+  </form>
+
+  <button class="btn btn-danger w-100" (click)="smazatHotove()">Smazat hotové úkoly</button>
+</div>
